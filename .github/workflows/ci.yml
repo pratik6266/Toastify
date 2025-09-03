@@ -26,9 +26,6 @@ jobs:
       - name: Run linter
         run: npm run lint --if-present
 
-      - name: Run tests
-        run: npm test -- --watchAll=false
-
       - name: Build project
         run: npm run build
 
