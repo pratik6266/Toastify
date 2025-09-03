@@ -1,0 +1,127 @@
+.toast{
+  width: clamp(250px, 22vw, 360px);
+  border-radius: 6px;
+  border: solid 2px #f44336;
+  background-color: #3d2928;
+  padding: 1rem;
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+
+  @starting-style{
+    transform: translateX(100%);
+  }
+}
+
+.toast-container{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exiting-toast{
+  animation: exitinAnimation 0.2s linear forwards;
+}
+@keyframes exitinAnimation {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.toast[data-type="success"]{
+  border: solid 2px #4caf50;
+  background-color: #293d28;
+}
+
+.toast[data-type="info"]{
+  border: solid 2px #2196f3;
+  background-color: #28343d;
+}
+
+.toast[data-type="error"]{
+  border: solid 2px #ff9800;
+  background-color: #3d3328;
+}
+
+.toast-container[data-position="top-right"]{
+  top: 10px;
+  right: 10px;
+}
+
+.toast-container[data-position="top-left"]{
+  top: 10px;
+  left: 10px;
+} 
+
+.toast-container[data-position="bottom-right"]{
+  bottom: 10px;
+  right: 10px;
+}
+
+.toast-container[data-position="bottom-left"]{
+  bottom: 10px;
+  left: 10px;
+}
+
+.close{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.close:hover{
+  color: #bbb;
+}
+
+.toast-content{
+  display: flex;
+  align-items: flex-start;
+  width: 95%;
+}
+
+.toast-info{
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.toast-title-description{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toast-cta{
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.toast-progress{
+  height: 0.2rem;
+  width: 100%;
+  background-color: rgb(0, 191, 255);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-radius: 6px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  transition: width 0.05s linear;
+}
+
+.toast-progress[type-param="success"]{
+  background-color: #00fa08;
+}
+
+.toast-progress[type-param="info"]{
+  background-color: #0008ff;
+}
+
+.toast-progress[type-param="error"]{
+  background-color: #ff0000;
+}
