@@ -1,7 +1,15 @@
 {
-  "name": "toastify",
-  "private": true,
-  "version": "0.0.0",
+  "name": "toast-with-fun",
+  "version": "1.0.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
