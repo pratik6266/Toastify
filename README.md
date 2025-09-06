@@ -1,78 +1,69 @@
+# React + TypeScript + Vite
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# Toastify
+Currently, two official plugins are available:
 
-Toastify is a customizable React toast notification system built with TypeScript. It provides a ToastProvider and a Toast service for showing notifications anywhere in your app.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Features
-- Show success, error, and info toasts
-- Custom title, description, CTA, and position
-- Pause/resume on hover
-- Animated exit and progress bar
-- Easy integration with React context/provider
+## Expanding the ESLint configuration
 
-## Installation
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```bash
-npm install toastify
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-## Usage
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Wrap your app with the `ToastProvider`:
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-```tsx
-import ToastProvider from 'toastify/dist/provider/ToastProvider';
-import { Toast } from 'toastify';
-
-function App() {
-  return (
-    <ToastProvider>
-      <YourComponent />
-    </ToastProvider>
-  );
-}
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-Show a toast from anywhere:
-
-```tsx
-Toast.sendToast({
-  title: 'Success',
-  description: 'This is a success toast',
-  type: 'success', // 'success' | 'error' | 'info'
-  cta: 'Undo',     // optional
-  position: 'top-right' // 'top-right', 'top-left', 'bottom-right', 'bottom-left'
-});
-```
-
-## API
-
-- `Toast.sendToast({ title, description, type, cta?, position? })`
-  - `title`: string (required)
-  - `description`: string (required)
-  - `type`: 'success' | 'error' | 'info' (optional, default: 'success')
-  - `cta`: string (optional)
-  - `position`: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' (optional, default: 'top-right')
-
-## Example
-
-```tsx
-import { Toast } from 'toastify';
-
-function MyButton() {
-  const handleClick = () => {
-    Toast.sendToast({
-      title: 'Success',
-      description: 'Your action was successful!',
-      type: 'success',
-      position: 'top-right'
-    });
-  };
-  return <button onClick={handleClick}>Show Toast</button>;
-}
-```
-
-## License
-
-MIT

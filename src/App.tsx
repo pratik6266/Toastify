@@ -1,6 +1,6 @@
 import './index.css'
 import ToastProvider from './provider/ToastProvider';
-import { Toast } from './index';
+import toastService from './provider/toastService';
 
 function App() {
 
@@ -18,7 +18,7 @@ function MyTest() {
   // const { addToast } = useToast();
 
   const handleClick = () => {
-    Toast.sendToast({
+    toastService.sendToast({
       title: 'Success',
       description: 'This is a success toast',
       type: 'success',
